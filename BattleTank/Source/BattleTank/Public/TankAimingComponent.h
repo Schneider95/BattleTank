@@ -20,7 +20,7 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	void AimAt(FVector HitLocation) const;
+	void AimAt(FVector HitLocation, float LaunchSpeed) const;
 	
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 };
