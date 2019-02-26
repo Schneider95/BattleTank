@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "TankBarrel.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -11,14 +12,19 @@ UTankAimingComponent::UTankAimingComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) const
+void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) 
 {
-	if (!Barrel) { return; }
-
+	UE_LOG(LogTemp, Warning, TEXT("AimAt"));
+	if (!Barrel)
+	{ 
+		UE_LOG(LogTemp, Warning, TEXT("NO BARREL"));
+		return; 
+	}
+	
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-
-	if (UGameplayStatics::SuggestProjectileVelocity(
+	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
+	(
 		this,
 		OutLaunchVelocity,
 		StartLocation,
@@ -28,15 +34,32 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) const
 		0,
 		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace
-	)) 
+	);
+
+	if (bHaveAimSolution) 
 	{
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal(); 
-		FString TankName = GetOwner()->GetName();
-		UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *TankName, *AimDirection.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("bHaveAimSolutions"));
+		MoveBarrelTowards(AimDirection);
 	}
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
+	UE_LOG(LogTemp, Warning, TEXT("SetBarrelReference"));
 	Barrel = BarrelToSet;
+}
+
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+{
+	// Current FRotator of the barrel
+	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
+	// Current FRotator of the aim
+	FRotator AimAsRotator = AimDirection.Rotation();
+	// Difference between the two
+	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
+
+	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator : %s"), *AimAsRotator.ToString());
+
+	Barrel->Elevate(5);
 }

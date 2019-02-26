@@ -11,26 +11,26 @@ void ATankAIController::BeginPlay()
 
 	if (!ControlledTank)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("ControlledTank not found for AI Tank !"));
+		//UE_LOG(LogTemp, Warning, TEXT("ControlledTank not found for AI Tank !"));
 	}
 
 	if (!PlayerTank)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("AI Tank %s didn't found Player Tank !"), *(ControlledTank->GetName()));
+		//UE_LOG(LogTemp, Warning, TEXT("AI Tank %s didn't found Player Tank !"), *(ControlledTank->GetName()));
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("ControlledTank found for AI Tank : %s"), *(ControlledTank->GetName()));
-	UE_LOG(LogTemp, Warning, TEXT("AI Tank %s found Player Tank : %s"), *(ControlledTank->GetName()), *(PlayerTank->GetName()));
+	//UE_LOG(LogTemp, Warning, TEXT("ControlledTank found for AI Tank : %s"), *(ControlledTank->GetName()));
+	//UE_LOG(LogTemp, Warning, TEXT("AI Tank %s found Player Tank : %s"), *(ControlledTank->GetName()), *(PlayerTank->GetName()));
 }
 
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	UE_LOG(LogTemp, Warning, TEXT("AIController tick ---------------------------------------------------------------------------------------------"));
+	//UE_LOG(LogTemp, Warning, TEXT("AIController tick ---------------------------------------------------------------------------------------------"));
 	
 	if (GetPlayerTank()) 
 	{ 
-		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());	
+		//GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());	
 	}
 }
 
