@@ -38,8 +38,6 @@ private:
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 	
-
-
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;

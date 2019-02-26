@@ -15,10 +15,7 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 protected:
-
-	
 	UTankAimingComponent* TankAimingComponent = nullptr;
-
 
 public:
 	// Sets default values for this pawn's properties
@@ -27,9 +24,6 @@ public:
 	void AimAt(FVector HitLocation);
 
 	virtual void BeginPlay() override;
-
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

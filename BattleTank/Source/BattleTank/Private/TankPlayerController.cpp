@@ -19,7 +19,7 @@ void ATankPlayerController::BeginPlay()
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	UE_LOG(LogTemp, Warning, TEXT("PlayerController tick ---------------------------------------------------------------------------------------------"));
+	//UE_LOG(LogTemp, Warning, TEXT("PlayerController tick ---------------------------------------------------------------------------------------------"));
 	AimTowardsCrosshair();
 }
 
@@ -36,7 +36,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("AimTowardsCrosshair Hit Location : %s"), *HitLocation.ToString());
+		//UE_LOG(LogTemp, Warning, TEXT("AimTowardsCrosshair Hit Location : %s"), *HitLocation.ToString());
 		GetControlledTank()->AimAt(HitLocation);
 	}
 }
@@ -50,13 +50,13 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 
 	FVector2D ScreenLocation = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
 
-	UE_LOG(LogTemp, Warning, TEXT("AimCrosshair location on screen : %s"), *ScreenLocation.ToString());
+	// UE_LOG(LogTemp, Warning, TEXT("AimCrosshair location on screen : %s"), *ScreenLocation.ToString());
 
 	// "De-project" the screen position of the crosshair to a world direction
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Look direction through crosshair : %s"), *LookDirection.ToString());
+		// UE_LOG(LogTemp, Warning, TEXT("Look direction through crosshair : %s"), *LookDirection.ToString());
 		// Line-trace along that look direction, and see what we hit (up to max range)
 
 		GetLookVectorHitLocation(LookDirection, HitLocation);
