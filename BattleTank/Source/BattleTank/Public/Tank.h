@@ -19,8 +19,12 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 public:
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed = 100000; // 1000 m/s
+
 	// Sets default values for this pawn's properties
 	ATank();
+
 
 	void AimAt(FVector HitLocation);
 
@@ -35,7 +39,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret * TurretToSet);
 
-	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000; // 1000 m/s
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
 	
 };

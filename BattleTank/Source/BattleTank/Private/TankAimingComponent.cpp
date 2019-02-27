@@ -11,7 +11,7 @@ UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) 
@@ -23,7 +23,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		return; 
 	}
 	
-	FVector OutLaunchVelocity;
+	FVector OutLaunchVelocity; 
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
 	(
@@ -43,12 +43,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	if (bHaveAimSolution) 
 	{
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal(); 
-		UE_LOG(LogTemp, Warning, TEXT("%f : Aim solution found"), Time);
+		//UE_LOG(LogTemp, Warning, TEXT("%f : Aim solution found"), Time);
 		MoveBarrelTowards(AimDirection);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("%f : No aim solution found"), Time);
+		//UE_LOG(LogTemp, Warning, TEXT("%f : No aim solution found"), Time);
 	}
 }
 
@@ -74,4 +74,5 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
 
 	Barrel->Elevate(DeltaRotator.Pitch);
+	Turret->Rotate(DeltaRotator.Yaw);
 }
