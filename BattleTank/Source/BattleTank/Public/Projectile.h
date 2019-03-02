@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -20,8 +21,13 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
+	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
+
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void LaunchProjectile(float Speed);
 
 	
 	

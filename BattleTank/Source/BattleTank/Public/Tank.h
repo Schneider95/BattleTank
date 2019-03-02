@@ -21,16 +21,28 @@ protected:
 
 public:
 	ATank();
+	
+	UTankBarrel* Barrel = nullptr;
+
+	double LastFireTime = 0;
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000; // 1000 m/s
+	
 
-	UTankBarrel* Barrel = nullptr;
+	float ReloadTimeInSeconds = 3;
 
-	void AimAt(FVector HitLocation);
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
 
 	virtual void BeginPlay() override;
 
+	void AimAt(FVector HitLocation);
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
+	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
@@ -38,11 +50,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret * TurretToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Firing)
-	void Fire();
-
-	UPROPERTY(EditAnywhere, Category = Setup)
-	TSubclassOf<AProjectile> ProjectileBlueprint; 
-
 };
