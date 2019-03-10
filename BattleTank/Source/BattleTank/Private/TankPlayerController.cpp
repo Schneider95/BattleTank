@@ -9,19 +9,11 @@ void ATankPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	ATank* ControlledTank = GetControlledTank();
-
-	if (!ControlledTank)
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("PlayerController is not possessing a tank !"));
-	}
-
-	//UE_LOG(LogTemp, Warning, TEXT("PlayerController possess %s"), *(ControlledTank->GetName()));
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//UE_LOG(LogTemp, Warning, TEXT("PlayerController tick ---------------------------------------------------------------------------------------------"));
 	AimTowardsCrosshair();
 }
 
@@ -38,7 +30,6 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("AimTowardsCrosshair Hit Location : %s"), *HitLocation.ToString());
 		GetControlledTank()->AimAt(HitLocation);
 	}
 }
@@ -76,12 +67,10 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 		ECollisionChannel::ECC_Visibility
 	))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("You look at the ground, maybe a firing solution can be found"), *HitLocation.ToString());
 		HitLocation = HitResult.Location;
 		return true;
 	}
 
-	//UE_LOG(LogTemp, Warning, TEXT("You look at the sky, a firing solution can't be found"), *HitLocation.ToString());
 	HitLocation = FVector(0);
 	return false;
 }

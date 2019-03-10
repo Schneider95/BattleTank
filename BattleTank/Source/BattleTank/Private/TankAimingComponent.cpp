@@ -16,10 +16,8 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) 
 {
-	//UE_LOG(LogTemp, Warning, TEXT("AimAt"));
 	if (!Barrel)
 	{ 
-		UE_LOG(LogTemp, Warning, TEXT("NO BARREL"));
 		return; 
 	}
 	
@@ -43,12 +41,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	if (bHaveAimSolution) 
 	{
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal(); 
-		//UE_LOG(LogTemp, Warning, TEXT("%f : Aim solution found"), Time);
 		MoveBarrelTowards(AimDirection);
-	}
-	else
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("%f : No aim solution found"), Time);
 	}
 }
 

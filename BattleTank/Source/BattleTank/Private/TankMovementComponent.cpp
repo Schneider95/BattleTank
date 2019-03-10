@@ -18,9 +18,6 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 	if (!LeftTrack) { return; }
 	if (!RightTrack) { return; }
 
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("Intend move forward throw: %f"), Throw);
-
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 }
@@ -30,11 +27,14 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 	if (!LeftTrack) { return; }
 	if (!RightTrack) { return; }
 
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("Intend turn right: %f"), Throw);
-
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
 }
 
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	FString TankName = GetOwner()->GetName();
+	FString MoveVelocityString = MoveVelocity.ToString();
+	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString);
+}
 
