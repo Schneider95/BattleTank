@@ -29,6 +29,7 @@ public:
 	
 	UTankBarrel* Barrel = nullptr;
 
+
 	double LastFireTime = 0;
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
@@ -40,19 +41,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
-
-	virtual void BeginPlay() override;
-
 	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
 	
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret * TurretToSet);
 };
