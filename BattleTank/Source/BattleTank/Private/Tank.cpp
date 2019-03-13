@@ -19,8 +19,9 @@ ATank::ATank()
 
 void ATank::BeginPlay()
 {
+	UE_LOG(LogTemp, Warning, TEXT("DONKEY Tank.cpp BeginPlay avant Super::BeginPlay : %s"), *GetName());
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("DONKEY Tank.cpp BeginPlay : %s"), *GetName());
+	UE_LOG(LogTemp, Warning, TEXT("DONKEY Tank.cpp BeginPlay apres Super::BeginPlay : %s"), *GetName());
 }
 
 void ATank::AimAt(FVector HitLocation)
