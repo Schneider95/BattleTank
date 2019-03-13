@@ -24,6 +24,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	UTankMovementComponent* TankMovementComponent = nullptr;
 
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 public:
 	ATank();
 	
