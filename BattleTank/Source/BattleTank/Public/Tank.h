@@ -10,7 +10,6 @@ class AProjectile;
 class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
-class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -20,9 +19,6 @@ class BATTLETANK_API ATank : public APawn
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
-	
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -31,7 +27,6 @@ public:
 	ATank();
 	
 	UTankBarrel* Barrel = nullptr;
-
 
 	double LastFireTime = 0;
 
