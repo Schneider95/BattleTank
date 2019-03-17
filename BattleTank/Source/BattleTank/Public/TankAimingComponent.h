@@ -63,4 +63,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
 		void Fire();
+
+	FVector AimDirection;
+
+	bool IsBarrelMoving();
 };
