@@ -14,7 +14,7 @@ UTankAimingComponent::UTankAimingComponent()
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) 
+void UTankAimingComponent::AimAt(FVector HitLocation) 
 {
 	if (!Barrel)
 	{ 
@@ -47,9 +47,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
-	if (!Barrel) { return; }
-	if (!Turret) { return; }
-
+	if (!ensure(Barrel)) { return; }
+	if (!ensure(Turret)) { return; }
 
 	// Current FRotator of the barrel
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();

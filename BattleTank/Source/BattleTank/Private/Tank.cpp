@@ -6,7 +6,6 @@
 #include "TankBarrel.h"
 #include "TankTurret.h"
 #include "Components/InputComponent.h"
-#include "TankAimingComponent.h"
 #include "Engine/World.h"
 
 // Sets default values
@@ -24,13 +23,6 @@ void ATank::BeginPlay()
 	UE_LOG(LogTemp, Warning, TEXT("DONKEY Tank.cpp BeginPlay apres Super::BeginPlay : %s"), *GetName());
 }
 
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(TankAimingComponent)) { return; }
-
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-}
-
 void ATank::Fire()
 {
 	if (!ensure(Barrel)) { return; }
@@ -45,7 +37,7 @@ void ATank::Fire()
 			Barrel->GetSocketRotation(FName("Projectile"))
 		);
 
-		Projectile->LaunchProjectile(LaunchSpeed);
+		Projectile->LaunchProjectile(2);
 		LastFireTime = FPlatformTime::Seconds();
 	}
 }
