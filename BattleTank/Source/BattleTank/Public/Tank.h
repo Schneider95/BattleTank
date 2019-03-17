@@ -15,26 +15,11 @@ class BATTLETANK_API ATank : public APawn
 {
 	GENERATED_BODY()
 
-
 public:
 	ATank();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UTankBarrel* Barrel = nullptr;
-
-	double LastFireTime = 0;
-
-	
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	float ReloadTimeInSeconds = 3;
-
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
-	TSubclassOf<AProjectile> ProjectileBlueprint;
-
-	UFUNCTION(BlueprintCallable, Category = Firing)
-	void Fire();
-	
 
 };

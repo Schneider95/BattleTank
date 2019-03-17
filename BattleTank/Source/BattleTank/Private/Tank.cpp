@@ -23,21 +23,3 @@ void ATank::BeginPlay()
 	UE_LOG(LogTemp, Warning, TEXT("DONKEY Tank.cpp BeginPlay apres Super::BeginPlay : %s"), *GetName());
 }
 
-void ATank::Fire()
-{
-	if (!ensure(Barrel)) { return; }
-
-	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	
-	if (isReloaded)
-	{
-		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(
-			ProjectileBlueprint,
-			Barrel->GetSocketLocation(FName("Projectile")),
-			Barrel->GetSocketRotation(FName("Projectile"))
-		);
-
-		Projectile->LaunchProjectile(2);
-		LastFireTime = FPlatformTime::Seconds();
-	}
-}
